@@ -21,11 +21,13 @@ module Fastlane
         # select app
         app_id = params[:app_id] || manager.select_app(project_id, nil, :android)['appId']
 
+        UI.verbose "Uploading #{params[:cert_type]}: #{params[:sha_hash]}"
         # create new android app on Firebase
         api.upload_sha(project_id, app_id, params[:sha_hash], params[:cert_type])
 
         return unless !params[:download_config].nil? && params[:download_config] == true
 
+        UI.verbose 'Updating Firabse configuration'
         # Download config
         Actions::FirebaseManagementDownloadConfigAction.run(
           service_account_json_path: params[:service_account_json_path],
