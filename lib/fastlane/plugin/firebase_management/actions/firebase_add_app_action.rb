@@ -36,7 +36,7 @@ module Fastlane
 					# the result of the operation. This requires another Google API to be
 					# enabled and other stuff to do so just wait for 3 seconds here, fetch
 					# apps from Firebase and check whether the new app is there.
-					sleep 3
+					sleep 10
 
 					# download apps for project
 					apps = api.ios_app_list(project_id)
@@ -49,7 +49,7 @@ module Fastlane
 					api.add_android_app(project_id, bundle_id, display_name)
 
 					# see reason described above
-					sleep 3
+					sleep 10
 
 					# download apps for project
 					apps = api.android_app_list(project_id)
