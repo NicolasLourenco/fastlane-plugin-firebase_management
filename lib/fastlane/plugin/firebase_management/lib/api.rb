@@ -85,10 +85,12 @@ module Fastlane
                                 apps
                         end
 
-			def add_ios_app(project_id, bundle_id, app_name)
+			def add_ios_app(project_id, bundle_id, app_name, app_store_id, team_id)
 				parameters = {
 					"bundleId" => bundle_id,
-					"displayName" => app_name || ""
+					"displayName" => app_name || "",
+					"appStoreId" => app_store_id || "",
+					"teamId" => team_id || ""
 				}
 				
 				request_json("v1beta1/projects/#{project_id}/iosApps", :post, parameters)

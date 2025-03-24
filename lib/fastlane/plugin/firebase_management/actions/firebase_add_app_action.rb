@@ -23,13 +23,14 @@ module Fastlane
 				type = params[:type].to_sym
 
 				bundle_id = params[:bundle_id]
-
 				display_name = params[:display_name]
+				app_store_id = params[:app_store_id]
+				team_id = params[:team_id]
 
 				case type
 				when :ios
 					# create new ios app on Firebase
-					api.add_ios_app(project_id, bundle_id, display_name)
+					api.add_ios_app(project_id, bundle_id, display_name, app_store_id, team_id)
 
 					# App creation is a long-running operation.
 					# Creation endpoint returns operation ID which should be used to check
@@ -140,6 +141,16 @@ module Fastlane
 											env_name: "FIREBASE_DISPLAY_NAME",
 										 description: "Display name",
 											optional: true),
+
+					FastlaneCore::ConfigItem.new(key: :app_store_id,
+                                  env_name: "FIREBASE_APP_STORE_ID",
+                               description: "AppStore ID",
+                                  optional: true),
+
+					FastlaneCore::ConfigItem.new(key: :team_id,
+                                  env_name: "FIREBASE_TEAM_ID",
+                               description: "Team ID",
+                                  optional: true),
 
 					FastlaneCore::ConfigItem.new(key: :output_path,
 					                        env_name: "FIREBASE_OUTPUT_PATH",
